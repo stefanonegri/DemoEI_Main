@@ -12,7 +12,6 @@ main functionalities of WSO2 EI
 ## Pre tasks
 1) download backend service and run it:
   java -jar Hospital-Service-JDK11-2.0.0.jar
-2)
 
 
 ## Use Case 1: Routing
@@ -40,6 +39,10 @@ API resource property:Uri style: URI_TEMPLATE; Uri-template:/categories/{categor
 6) Respond Mediator in the default branch
 7) Add Send Mediator in the Output sequence
 
+### Test the use case
+Run the script: runDemoEI_Main_routing.sh
 
+## Use Case 2: Data Transformation
+### add data Data Mapper
 
 
