@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="ServiceChain" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <propertyGroup>
+        <property expression="json-eval($.appointmentNumber)" name="uri.var.appointment_id" scope="default" type="STRING"/>
+        <property expression="json-eval($.doctor)" name="doctor_details" scope="default" type="STRING"/>
+        <property expression="json-eval($.patient)" name="patient_details" scope="default" type="STRING"/>
+    </propertyGroup>
+    <call>
+        <endpoint key="ChannelingFeeEP"/>
+    </call>
+    <property expression="json-eval($.actualFee)" name="actual_fee" scope="default" type="STRING"/>
+    <payloadFactory media-type="json">
+        <format>{
+"appointmentNumber":$1,
+"doctor":$2,
+"patient":$3,
+"fee":$4,
+"confirmed":"false",
+"card_number":"$5"
+}</format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:uri.var.appointment_id"/>
+            <arg evaluator="xml" expression="$ctx:doctor_details"/>
+            <arg evaluator="xml" expression="$ctx:patient_details"/>
+            <arg evaluator="xml" expression="$ctx:actual_fee"/>
+            <arg evaluator="xml" expression="$ctx:card_number"/>
+        </args>
+    </payloadFactory>
+    <call>
+        <endpoint key="SettlePaymentEP"/>
+    </call>
+</sequence>
