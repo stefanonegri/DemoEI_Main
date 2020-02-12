@@ -12,6 +12,7 @@ main functionalities of WSO2 EI
 ## Pre tasks
 1) download backend service and run it:
   java -jar Hospital-Service-JDK11-2.0.0.jar
+2) import project SampleaService and SampleServiceCompositeApplication
 
 
 ## Use Case 1: Routing
@@ -44,5 +45,8 @@ Run the script: runDemoEI_Main_routing.sh
 
 ## Use Case 2: Data Transformation
 ### add data Data Mapper
-
+use input.json and output.json as template file
+### Test the use case
+Run the script: runDemoEI_Main_transf.sh
+## Use Case 3: Service Chain
 
