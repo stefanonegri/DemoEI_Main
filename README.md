@@ -12,28 +12,24 @@ main functionalities of WSO2 EI
 ## Pre tasks
 1) download backend service and run it:
   java -jar Hospital-Service-JDK11-2.0.0.jar
-2) import project SampleaService and SampleServiceCompositeApplication
+2) import project SampleService and SampleServiceCompositeApplication
 
 
 ## Use Case 1: Routing
-### Create a new project: DemoServices
 ### Create the following 3 Endpoints:
 GrandOakEP: http://localhost:9090/grandoaks/categories/{uri.var.category}/reserve
 
-ClemencyEP:  http://localhost:9090/clemency/categories/{uri.var.category}/reserve
-
-PineValleyEP:  http://localhost:9090/pinevalley/categories/{uri.var.category}/reserve
-
-all are http enpoints and have POST as method.
+set http enpoints and have POST as method.
 
 ### Create new API (HealthcareAPI)
-name: HealthcareAPI; context:/healthcare; Save Location: DemoServices
+name: HealthcareAPI; context:/healthcare;
 
 API resource property:Uri style: URI_TEMPLATE; Uri-template:/categories/{category}/reserve; method: POST
 
 ### Add the following mediators:
 1) Property (name: Hospital; value expression: json-eval($.hospital)
-2) Switch Mediator (Num of branches: 3; regex1: grand oak community hospital; regex2: clemency medical center; regex3: pine valley community hospital
+1b) Property (name: card_number; value expression: json-eval($.cardNo)
+2) Switch Mediator (Num of branches: 3; Source Xpath: get-property('Hospital'); regex1: grand oak community hospital; regex2: clemency medical center; regex3: pine valley community hospital
 3)Log mediator in each branch (CUSTOM; Value/Expression: fn:concat('Routing to ', get-property('Hospital'))
 4) Send Mediator in each branch with the corresponding EP
 5) Log Mediator in the default branch (CUSTOM; Value/Expression: fn:concat('Invalid hospital - ', get-property('Hospital'))
