@@ -45,8 +45,12 @@ use input.json and output.json as template file
 ### Test the use case
 Run the script: runDemoEI_Main_transf.sh
 ## Use Case 3: Service Chain
-### remove the Send Mediator
-and replace it with a Call mediator; same endpoint
-### add the ServiceChain sequence at the end of the process
-and add the following Property before the Call Mediator: name: uri.var.hospital; type: LITERAL; value: grandoaks
+### Update HealthcareAPI accordingly
+1) remove the Send Mediator and replace it with a Call mediator; same endpoint
+2) add the ServiceChain sequence at the end of the process
+3) add the following Property before the Call Mediator: name: uri.var.hospital; type: LITERAL; value: grandoaks
+
+## Show other features
+### debug and test
+### connectors store
 
