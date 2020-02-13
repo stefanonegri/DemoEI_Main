@@ -55,7 +55,7 @@ Run the script: runDemoEI_Main_transf.sh
 1) create an instance in cloud
 2) create a firewall rule
 3) copy the Hospital-Service-JDK11-2.0.0.jar in the cloud instance
-4) download JDK in the cloud instance: with the command: curl -L https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz -O
+4) download JDK in the cloud instance: with the command: curl -L https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz -O and unzip with tar xvf openjdk-9*_bin.tar.gz
 5) run the service
 
 ## Show other features
