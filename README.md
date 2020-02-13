@@ -50,6 +50,14 @@ Run the script: runDemoEI_Main_transf.sh
 2) add the ServiceChain sequence at the end of the process
 3) add the following Property before the Call Mediator: name: uri.var.hospital; type: LITERAL; value: grandoaks
 
+## Run it in integration cloud:
+### Backend services must be deployed in cloud (for example GCP)
+1) create an instance in cloud
+2) create a firewall rule
+3) copy the Hospital-Service-JDK11-2.0.0.jar in the cloud instance
+4) download JDK in the cloud instance: with the command: curl -L https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz -O
+5) run the service
+
 ## Show other features
 ### debug and test
 ### connectors store
