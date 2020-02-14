@@ -49,14 +49,20 @@ Run the script: runDemoEI_Main_transf.sh
 1) remove the Send Mediator and replace it with a Call mediator; same endpoint
 2) add the ServiceChain sequence at the end of the process
 3) add the following Property before the Call Mediator: name: uri.var.hospital; type: LITERAL; value: grandoaks
+### Test the use case
+Run the script: runDemoEI_Main_transf.sh
 
-## Run it in integration cloud:
+## Deploy in integration cloud:
 ### Backend services must be deployed in cloud (for example GCP)
 1) create an instance in cloud
 2) create a firewall rule
 3) copy the Hospital-Service-JDK11-2.0.0.jar in the cloud instance
 4) download JDK in the cloud instance: with the command: curl -L https://download.java.net/java/GA/jdk9/9.0.4/binaries/openjdk-9.0.4_linux-x64_bin.tar.gz -O and unzip with tar xvf openjdk-9*_bin.tar.gz
-5) run the service
+5) run the backend service in the GCP instance
+6)Deploy the artifact to WSO2 Integration Cloud; copy the url
+7) update the url in runDemoEI_Main_transf.sh
+### Test the use case
+Run the script: runDemoEI_Main_transf.sh
 
 ## Show other features
 ### debug and test
