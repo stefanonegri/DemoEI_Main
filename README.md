@@ -13,7 +13,32 @@ main functionalities of WSO2 EI
 1) download backend service and run it:
   java -jar Hospital-Service-JDK11-2.0.0.jar
 2) import project SampleService and SampleServiceCompositeApplication
+3) Optional: run on Kubernetes (GCP)
 
+3a - Create a GCP cluster (2 nodes, small size)
+
+3b -  Install Nginx Ingress Controller:
+
+kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user stene1969@gmail.com
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/mandatory.yaml
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.29.0/deploy/static/provider/cloud-generic.yaml
+
+3c - Install EI Operator:
+kubectl create -f deploy/service_account.yaml
+
+kubectl create -f deploy/role.yaml
+
+kubectl create -f deploy/role_binding.yaml
+
+kubectl create -f deploy/crds/integration_v1alpha1_integration_crd.yaml
+
+kubectl create -f deploy/operator.yaml
+
+kubectl apply -f deploy/config_map.yaml
+
+3d update file /etc/hosts with the following row: <INGRESS IP>  wso2ei
 
 ## Use Case 1: Routing
 ### Create the following 3 Endpoints:
@@ -63,6 +88,18 @@ Run the script: runDemoEI_Main_transf.sh
 7) update the url in runDemoEI_Main_transf.sh
 ### Test the use case
 Run the script: runDemoEI_Main_transf.sh
+
+## Deploy in Kubernetes / Create and run docker image
+### create Kubernetes Project from the Integration Studio (Generate Kubernetes Artifacts)
+1) use any name for the prject and Integration Name; as target repository name use stene1969/demoei (for example; use lower case char only); tag: 1.0.0
+2) run the docker container, for example: docker run -d -p 8290:8290 stene1969/demoei
+3) create a secret in K8s to access Docker repository: kubectl create secret docker-registry stene1969 --docker-username=stene1969 --docker-password=<pwd> --docker-email=stefano@wso2.com
+4) update the generated integration-cr.yaml file (in the workspace of Integration Studio): add the following row under spec: imagePullSecret: stene1969
+5) create the ingress: kubectl create -f eiingress.yaml
+  
+### execute the test:  
+curl -k -v -X POST --data @requestTransf.json https://wso2ei/healthcare/categories/surgery/reserve --header "Content-Type:application/json"
+
 
 ## Show other features
 ### debug and test
